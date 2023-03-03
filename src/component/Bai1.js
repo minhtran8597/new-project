@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const App = () => {
+const Bai1 = () => {
   const [user, setUser] = useState({
     name: "Minh",
     email: "tranthienminh@gmail.com",
@@ -89,6 +89,6 @@ const App = () => {
   );
 };
 
-export default App;
+export default Bai1;
 
 

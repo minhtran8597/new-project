@@ -1,19 +1,10 @@
-import Bai3 from "./component/Bai3";
+import Bai4 from './component/Bai4'
 
 const App = () => {
-
-
-
+  
   return (
-    <div>
-
-      <Bai3>
-
-      </Bai3>
-    </div>
+    <Bai4 />
   );
-};
+}
 
 export default App;
-
-

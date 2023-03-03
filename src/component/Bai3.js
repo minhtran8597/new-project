@@ -2,7 +2,6 @@ import { useState } from "react";
 
 const DEFAULT_USER = { name: "", email: "" };
 
-
 const Bai3 = () => {
   const [userList, setUserList] = useState([
     {
@@ -22,7 +21,6 @@ const Bai3 = () => {
         if (item.id === formData.id) {
           return formData;
         }
-
         return item;
       });
       setUserList(newUserList);
@@ -35,6 +33,7 @@ const Bai3 = () => {
         },
       ]);
     }
+
     setFormData[DEFAULT_USER]; // clear data
   };
 
