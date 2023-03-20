@@ -1,38 +1,42 @@
-const TableUserList = (props) => {
-  return (
-    <table border>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th></th>
-      </tr>
-      {props.userList.map((item) => {
-        return (
-          <tr>
-            <td>{item.name}</td>
-            <td>{item.email}</td>
-            <td></td>
-            <button
-              onClick={(e) => {
-                props.onEdit(item);
-              }}
-            >
-              Edit
-            </button>
+import { Table } from 'antd'
 
-            <button
-              onClick={(e) => {
-                props.onDelete(item);
-              }}
-            >
-              Delete
-            </button>
-          </tr>
-        );
-      })}
-      ;
-    </table>
-  );
+const TableUserList = (props) => {
+
+  
+
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+    },
+    {
+      title: 'Phone',
+      dataIndex: 'phone',
+      key: 'phone',
+    },
+  ];
+  
+  return (
+    <Table dataSource={props.dataSource} columns={columns} />
+  );  
 };
 
 export default TableUserList;
+
+
+// TableUserList //Component
+// address // biến
+// handleConfirm //function
+// COUNTRIES // constant
+// surveys // array
+// survey // biến or một phần tử
+
+
+  
+

@@ -1,26 +1,25 @@
-import {useState, useEffect} from "react";
-
+import { useState, useMemo } from "react";  // useEffect giống như forEach, useMomo giống map
 import FormUser from "./FormUser";
 import TableUserList from "./TableUserList";
 
 const DEFAULT_USER = { name: "", email: "" };
 
-const Bai4 = () => {
+const Bai5 = () => {
   const [userList, setUserList] = useState([]);
   const [formData, setFormData] = useState(DEFAULT_USER);
   const [keyword, setKeyword] = useState("");
-  const [searchUserList, setSearchUserList] = useState([]);
+  // const [searchUserList, setSearchUserList] = useState([]);
 
-  useEffect(() => {
+  const searchUserList = useMemo(() => {  //useMemo update 1 dữ liêu, useEffect update nhiều dữ liệu
     if (keyword !== "") {
-      const newUserList = userList.filter((item) => {
-        return item.name === keyword;
+      const newUserList = userList.filter((user) => {
+        return user.name.includes(keyword) || user.email.includes(keyword) ;
       });
-      setSearchUserList(newUserList);
+      return newUserList
     } else {
-      setSearchUserList(userList); 
+      return userList
     }
-  }, [keyword, userList]);   // khi keyword hay userList thay đổi giá trị thì sẽ thực hiện if else
+  }, [keyword, userList]);  
 
   const onClick = () => {
     if (formData.id) {
@@ -64,7 +63,6 @@ const Bai4 = () => {
 
   return (
     <div>
-      
       <FormUser
         formData={formData}
         setFormData={setFormData}
@@ -72,6 +70,7 @@ const Bai4 = () => {
       />
       <input value={keyword} onChange={onSearch} />
       {/* // <TableUserList userList={userList} onEdit={onEdit} onDelete={onDelete}/> */}
+
       <TableUserList
         searchUserList={searchUserList}
         onEdit={onEdit}
@@ -81,4 +80,4 @@ const Bai4 = () => {
   );
 };
 
-export default Bai4;
+export default Bai5;

@@ -1,10 +1,6 @@
-import Bai4 from './component/Bai4'
+import Exam05 from "./component/Exam05";
 
 const App = () => {
-  
-  return (
-    <Bai4 />
-  );
-}
-
+  return <Exam05 />;
+};
 export default App;

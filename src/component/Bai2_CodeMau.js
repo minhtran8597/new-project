@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 const Bai2 = () => {
-  const [student, setStudent] = useState({ id: "", score: '' }); 
-  const [studentList, setStudentList] = useState([              //object
+  const [student, setStudent] = useState({ id: "", score: '' });
+  const [studentList, setStudentList] = useState([
     { id: "123", score: 10 },
     { id: "456", score: 10 },
   ]);
@@ -13,23 +13,24 @@ const Bai2 = () => {
       student
     ]);
 
-    setStudent({ id: "", score: '' })// dong nay a?
-  }; 
+    setStudent({ id: "", score: '' })
+  };
 
+  const onChange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
 
-  const onChange = (e) => {  
     setStudent({
       ...student,
-      [e.target.name]: e.target.value
+      [name]: value
     })
-  }; 
-
+  };
 
   return (
     <div>
       <div>
         <input name='id' value={student.id} onChange={onChange} />
-        <input name='score' value={student.score} onChange={onChange} />
+        <input name='score' value={student.id} onChange={onChange} />
         <button onClick={onClick}>Add</button>
       </div>
 
@@ -47,7 +48,3 @@ const Bai2 = () => {
 };
 
 export default Bai2;
-
-
-
-// 
