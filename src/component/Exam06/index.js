@@ -1,27 +1,29 @@
-// Book: title, author, description, type, page.
-
 import { useState, useEffect, useMemo } from "react";
-import ModalFormBooks from "./ModalFormBook";
-import TableBooks from "./TableBook";
-import { ButtonCreate, SearchContainer, SearchBox } from "./styles";
+import ModalFormCountry from "./ModalFormCountry";
+import TableCountry from "./TableCountry";
+import { SearchBox, SearchContainer } from "./styles";
 import axios from "axios";
+import { Button } from "antd";
+import ModalWeather from "./ModalWeather";
+import ButtonImport from "./ButtonImport";
 
-const DEFAULT_BOOK = {
-  title: "",
-  author: "",
-  description: "",
-  type: "",
-  page: "",
+const DEFAULT_COUNTRY = {
+  city: "",
+  country: "",
+  countryCode: "",
+  population: "",
+  countryFlag: "",
 };
 
-const Exam05 = (props) => {
-  const [formData, setFormData] = useState(DEFAULT_BOOK);
+const Exam06 = (props) => {
+  const [formData, setFormData] = useState(DEFAULT_COUNTRY);
   const [dataSource, setDataSource] = useState([]);
   const [tableLoading, setTableLoading] = useState(false);
   const [itemLoading, setItemLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [submitLoading, setSubmitLoading] = useState(false);
+  const [cityName, setCityName] = useState("");
 
   // GET: lấy thông tin dữ liệu
   // axiout.get(url)
@@ -46,7 +48,7 @@ const Exam05 = (props) => {
   const searchDataSource = useMemo(() => {
     if (keyword) {
       return dataSource.filter((item) => {
-        return item.title.includes(keyword) || item.author.includes(keyword);
+        return item.city.includes(keyword) || item.country.includes(keyword);
       });
     }
     return dataSource;
@@ -56,7 +58,7 @@ const Exam05 = (props) => {
     setTableLoading(true);
 
     axios
-      .get("https://64146a189172235b86942d58.mockapi.io/api/vi/book")
+      .get("https://64146a189172235b86942d58.mockapi.io/api/vi/cities")
       .then((res) => {
         setDataSource(res.data);
         setTableLoading(false);
@@ -67,7 +69,7 @@ const Exam05 = (props) => {
   };
 
   const onCreate = () => {
-    setFormData(DEFAULT_BOOK);
+    setFormData(DEFAULT_COUNTRY);
     setOpen(true);
   };
 
@@ -75,7 +77,7 @@ const Exam05 = (props) => {
     setItemLoading(true);
 
     axios
-      .get(`https://64146a189172235b86942d58.mockapi.io/api/vi/book/${id}`)
+      .get(`https://64146a189172235b86942d58.mockapi.io/api/vi/cities/${id}`)
       .then((res) => {
         setFormData(res.data);
         setOpen(true);
@@ -86,7 +88,7 @@ const Exam05 = (props) => {
   const onDelete = (id) => {
     setItemLoading(true);
     axios
-      .delete(`https://64146a189172235b86942d58.mockapi.io/api/vi/book/${id}`)
+      .delete(`https://64146a189172235b86942d58.mockapi.io/api/vi/cities/${id}`)
       .then((res) => {
         setItemLoading(false);
         fetchData();
@@ -109,21 +111,21 @@ const Exam05 = (props) => {
     if (id) {
       axios
         .put(
-          `https://64146a189172235b86942d58.mockapi.io/api/vi/book/${id}`,
+          `https://64146a189172235b86942d58.mockapi.io/api/vi/cities/${id}`,
           data
         )
         .then((res) => {
           setSubmitLoading(false); //báo hiệu dữ liệu xử lý xong
-          setFormData(DEFAULT_BOOK);
+          setFormData(DEFAULT_COUNTRY);
           setOpen(false);
           fetchData();
         });
     } else {
       axios
-        .post("https://64146a189172235b86942d58.mockapi.io/api/vi/book", data)
+        .post("https://64146a189172235b86942d58.mockapi.io/api/vi/cities", data)
         .then((res) => {
           setSubmitLoading(false); //báo hiệu dữ liệu xử lý xong
-          setFormData(DEFAULT_BOOK);
+          setFormData(DEFAULT_COUNTRY);
           setOpen(false);
           fetchData();
         });
@@ -138,9 +140,38 @@ const Exam05 = (props) => {
     // ]);
   };
 
+  const onGetWeather = (name) => {
+    setCityName(name);
+  };
+
+  const onImport = async (items) => {
+    setTableLoading(true);
+    for (let i = 0; i < items.length; i++) {
+      await axios.post(
+        "https://64146a189172235b86942d58.mockapi.io/api/vi/cities",
+        items[i]
+      );
+    }
+
+    fetchData();
+  }; // cái này của back-end không dùng ở đây.
+
+  // const onImport = (items) => {
+  //   const promise = [];
+  //   for (let i = 0; i < items.length; i++) {
+  //     axios.post(
+  //       ("https://64146a189172235b86942d58.mockapi.io/api/vi/cities", items[i])
+  //     );
+  //   }
+
+  //   Promise.all(promise).then(() => {
+  //     fetchData();
+  //   });
+  // };
+
   return (
     <div>
-      <ModalFormBooks
+      <ModalFormCountry
         open={open}
         loading={submitLoading}
         setOpen={setOpen}
@@ -148,24 +179,30 @@ const Exam05 = (props) => {
         formData={formData}
         onChange={onChange}
       />
+
+      <ModalWeather name={cityName} />
       <SearchContainer>
         <SearchBox onChange={onSearch} value={keyword} />
-        <ButtonCreate onClick={onCreate}>New Book</ButtonCreate>
+        <div>
+          <ButtonImport onImport={onImport} />
+          <Button onClick={onCreate}>New Country</Button>
+        </div>
       </SearchContainer>
 
-      <TableBooks
+      <TableCountry
         loading={tableLoading}
         itemLoading={itemLoading}
         dataSource={searchDataSource}
         onDelete={onDelete}
         onEdit={onEdit}
+        onGetWeather={onGetWeather}
       />
       {/* ; // kiểm tra có input, output không */}
     </div>
   );
 };
 
-export default Exam05;
+export default Exam06;
 
 // SearchBox : component hay class
 // handleClick : function (động từ)

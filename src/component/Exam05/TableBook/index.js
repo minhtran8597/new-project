@@ -1,5 +1,5 @@
-import { Table } from "antd";
-import { Actions, ButtonAction } from "./styles";
+import { Button, Table } from "antd";
+import { Actions } from "./styles";
 
 const TableBooks = (props) => {
   const columns = [
@@ -40,20 +40,22 @@ const TableBooks = (props) => {
         console.log(item);
         return (
           <Actions>
-            <ButtonAction
+            <Button
+              disabled={props.itemLoading}
               onClick={() => {
-                props.onEdit(item);
+                props.onEdit(item.id);
               }}
             >
               Edit
-            </ButtonAction>
-            <ButtonAction
+            </Button>
+            <Button
+              disabled={props.itemLoading}
               onClick={() => {
-                props.onDelete(item);
+                props.onDelete(item.id);
               }}
             >
               Delete
-            </ButtonAction>
+            </Button>
           </Actions>
         );
       },
@@ -62,7 +64,12 @@ const TableBooks = (props) => {
 
   return (
     <div>
-      <Table dataSource={props.dataSource} columns={columns} />;
+      <Table
+        loading={props.loading}
+        dataSource={props.dataSource}
+        columns={columns}
+      />
+      ;
     </div>
   );
 };

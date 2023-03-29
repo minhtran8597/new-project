@@ -28,7 +28,12 @@ const ModalFormBooks = (props) => {
   };
 
   return (
-    <Modal open={props.open} onOk={onSubmit} onCancel={onCancel}>
+    <Modal
+      open={props.open}
+      submitLoading={props.loading}
+      onOk={onSubmit}
+      onCancel={onCancel}
+    >
       <Form form={form} layout="vertical">
         <Form.Item
           name="title"

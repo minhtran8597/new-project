@@ -1,6 +1,6 @@
-import Exam05 from "./component/Exam05";
+import index from "../src/index";
 
 const App = () => {
-  return <Exam05 />;
+  return index;
 };
 export default App;

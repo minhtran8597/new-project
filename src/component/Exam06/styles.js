@@ -29,11 +29,4 @@ export const ButtonCreate = styled(Button)`
     background-color: #eeeeee;
     border-color: #00000;
   }
-
-  &:active,
-  &focus {
-    color: #00000;
-    background-color: blue;
-    border-color: #00000;
-  }
 `;
