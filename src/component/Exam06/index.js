@@ -1,11 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
 import ModalFormCountry from "./ModalFormCountry";
 import TableCountry from "./TableCountry";
-import { SearchBox, SearchContainer } from "./styles";
+import { SearchContainer } from "./styles";
 import axios from "axios";
 import { Button } from "antd";
 import ModalWeather from "./ModalWeather";
 import ButtonImport from "./ButtonImport";
+import SearchBox from "../SearchBox";
 
 const DEFAULT_COUNTRY = {
   city: "",
@@ -80,8 +81,8 @@ const Exam06 = (props) => {
       .get(`https://64146a189172235b86942d58.mockapi.io/api/vi/cities/${id}`)
       .then((res) => {
         setFormData(res.data);
-        setOpen(true);
         setItemLoading(false);
+        setOpen(true);
       });
   };
 
@@ -93,16 +94,6 @@ const Exam06 = (props) => {
         setItemLoading(false);
         fetchData();
       });
-  };
-
-  const onChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
   };
 
   const onSubmit = (id, data) => {
@@ -177,7 +168,6 @@ const Exam06 = (props) => {
         setOpen={setOpen}
         onSubmit={onSubmit}
         formData={formData}
-        onChange={onChange}
       />
 
       <ModalWeather name={cityName} />

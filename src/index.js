@@ -5,17 +5,22 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Dashboard from "./pages/Dashboard";
 import Welcome from "./pages/Welcome";
+import Students from "./pages/Students";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <PublicRoute component={<Welcome />} />,
+    element: <PublicRoute component={<Welcome />} />, // element: <Welcome />
   },
   {
     path: "/dashboard",
     element: <PrivateRoute component={<Dashboard />} />,
+  },
+  {
+    path: "/students",
+    element: <PrivateRoute component={<Students />} />,
   },
 ]);
 

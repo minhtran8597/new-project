@@ -44,7 +44,7 @@ const Exam06 = () => {
     setTableLoading(true);
 
     axios
-      .get("https://6401dc8a0a2a1afebef3bf4b.mockapi.io/cities")
+      .get("https://64146a189172235b86942d58.mockapi.io/api/vi/cities")
       .then((res) => {
         setDataSource(res.data);
         setTableLoading(false);
@@ -64,7 +64,7 @@ const Exam06 = () => {
     setItemLoading(true);
 
     axios
-      .get(`https://6401dc8a0a2a1afebef3bf4b.mockapi.io/cities/${id}`)
+      .get(`https://64146a189172235b86942d58.mockapi.io/api/vi/cities/${id}`)
       .then((res) => {
         setFormData(res.data);
         setItemLoading(false);
@@ -80,7 +80,9 @@ const Exam06 = () => {
         setItemLoading(true);
 
         axios
-          .delete(`https://6401dc8a0a2a1afebef3bf4b.mockapi.io/cities/${id}`)
+          .delete(
+            `https://64146a189172235b86942d58.mockapi.io/api/vi/cities/${id}`
+          )
           .then((res) => {
             setItemLoading(false);
             fetchData();
@@ -94,7 +96,10 @@ const Exam06 = () => {
 
     if (id) {
       axios
-        .put(`https://6401dc8a0a2a1afebef3bf4b.mockapi.io/cities/${id}`, data)
+        .put(
+          `https://64146a189172235b86942d58.mockapi.io/api/vi/cities/${id}`,
+          data
+        )
         .then((res) => {
           setSubmitLoading(false);
           setFormData(DEFAULT_CITY);
@@ -103,7 +108,7 @@ const Exam06 = () => {
         });
     } else {
       axios
-        .post("https://6401dc8a0a2a1afebef3bf4b.mockapi.io/cities", data)
+        .post("https://64146a189172235b86942d58.mockapi.io/api/vi/cities", data)
         .then((res) => {
           setSubmitLoading(false);
           setFormData(DEFAULT_CITY);
@@ -123,7 +128,7 @@ const Exam06 = () => {
 
     for (let i = 0; i < items.length; i++) {
       await axios.post(
-        "https://6401dc8a0a2a1afebef3bf4b.mockapi.io/cities",
+        "https://64146a189172235b86942d58.mockapi.io/api/vi/cities",
         items[i]
       );
     }

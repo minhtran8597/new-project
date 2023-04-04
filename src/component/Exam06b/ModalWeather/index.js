@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Modal } from "antd";
-import { Item, Condition } from './styles'
+import { Item, Condition } from "./styles";
 
 const ModalWeather = ({ open, setOpen, name }) => {
   const [data, setData] = useState({});
@@ -10,7 +10,7 @@ const ModalWeather = ({ open, setOpen, name }) => {
     if (open) {
       axios
         .get(
-          `http://api.weatherapi.com/v1/current.json?key=355b9b6e81644379b15114916232403&q=${name}&aqi=no`
+          `http://api.weatherapi.com/v1/current.json?key=a1d16077bc3e46c3bd3132659232403%20&q=${name}&aqi=no`
         )
         .then((res) => {
           setData(res.data);
@@ -20,8 +20,8 @@ const ModalWeather = ({ open, setOpen, name }) => {
   }, [open]);
 
   const onCancel = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <Modal open={open} footer={null} onCancel={onCancel}>
@@ -33,8 +33,11 @@ const ModalWeather = ({ open, setOpen, name }) => {
           </Item>
           <div>
             <img src="/images/giotnuoc.png" width={16} />
-            Nhiệt độ (C): {data.current.temp_c}<sup>&#9900;</sup></div>
-          <Item>Thời tiết: 
+            Nhiệt độ (C): {data.current.temp_c}
+            <sup>&#9900;</sup>
+          </div>
+          <Item>
+            Thời tiết:
             <Condition>
               {data.current.condition.text}
               <img src={data.current.condition.icon} />

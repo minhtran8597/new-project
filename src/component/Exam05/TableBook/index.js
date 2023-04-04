@@ -69,7 +69,6 @@ const TableBooks = (props) => {
         dataSource={props.dataSource}
         columns={columns}
       />
-      ;
     </div>
   );
 };

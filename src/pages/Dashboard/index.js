@@ -1,11 +1,10 @@
-import Layout from "../../layout/Public";
-import Exam06 from "../../component/Exam06b";
+import Layout from "../../layout/Default";
+import Exam06 from "../../component/Exam06";
 
 const Dashboard = () => {
-  <h1>Log In</h1>;
   return (
     <Layout>
-      <Exam06 />;
+      <Exam06 />
     </Layout>
   );
 };

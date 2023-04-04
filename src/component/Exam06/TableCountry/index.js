@@ -20,13 +20,13 @@ const TableCoutry = (props) => {
       title: "City",
       dataIndex: "city",
       key: "city",
-      width: "15%",
+      width: "25%",
     },
     {
       title: "Quốc gia",
       dataIndex: "country",
       key: "country",
-      width: "15%",
+      width: "25%",
       render: (_, item) => {
         return (
           <Country>
@@ -45,7 +45,7 @@ const TableCoutry = (props) => {
       dataIndex: "population",
       key: "population",
       align: "center", // thuộc tính của antd ko phải css
-      width: "15%",
+      width: "25%",
       render: (_, item) => {
         const color = getColor(item.population);
         return (
@@ -59,7 +59,7 @@ const TableCoutry = (props) => {
     {
       title: "",
       dataIndex: "actions",
-      width: "20%",
+      width: "25%",
       render: (text, item) => {
         console.log(item);
         return (
@@ -100,7 +100,6 @@ const TableCoutry = (props) => {
         dataSource={props.dataSource}
         columns={columns}
       />
-      ;
     </div>
   );
 };
